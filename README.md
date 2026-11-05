@@ -1,2 +1,29 @@
 # trpg-assist
-TRPG assist site: invite-only tables, house rules, dice, character sheets, session logs
+
+TRPG向けの卓共有サイト。卓ごとに招待リンクで参加者を限定し、ハウスルール・ダイスロール・キャラクターシート・セッション記録を共有できます。
+
+対応システム: クトゥルフ神話TRPG(CoC6/7版)、ソード・ワールド2.5、シノビガミ、エモクロアTRPG、その他(汎用ダイス)
+
+## 構成
+
+- `web/` 静的フロント。GitHub Actionsでダイスのバンドル(`web/dice.js`)をビルドして GitHub Pages に公開
+- `worker/` Cloudflare Worker(API) + D1(データ保存)。`schema.sql` をD1に適用し、`src/index.js` をデプロイする
+- `build/` ダイス判定(BCDice)のブラウザ向けバンドル定義
+- `ci/pages.yml` Pages公開用ワークフロー。`.github/workflows/pages.yml` に移動して使う
+
+## 仕組み
+
+- アカウントなし。卓の作成者がGMになり、招待リンクを共有する
+- 参加時に表示名を入力すると端末(localStorage)に参加トークンが保存される
+- 招待リンクはGMが再発行して無効化できる。GMは参加者の追放、卓の削除ができる
+- ブラウザのデータを消した場合は、招待リンクを開き直して再参加する
+
+## 注意
+
+- ダイスはブラウザ内で判定され、結果が卓のログに記録される。サーバー側での不正防止はしていない
+- シークレットダイスは記録されず、自分の画面にのみ表示される
+- 公式ルールブックの文章・表は収録していない
+
+## ライセンス
+
+BCDiceは BSD-3-Clause。
