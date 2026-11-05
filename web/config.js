@@ -1,1 +1,1 @@
-export const API = "https://trpg-assist-api.yukkuritomoboo.workers.dev";
+export const API = "https://trpg-assist-api.leila.li";
