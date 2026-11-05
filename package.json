@@ -1,0 +1,14 @@
+{
+  "name": "trpg-assist",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && cp -r web/. dist/ && esbuild build/entry.js --bundle --format=esm --minify --platform=browser --outfile=dist/dice.js"
+  },
+  "dependencies": {
+    "bcdice": "^4.10.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
