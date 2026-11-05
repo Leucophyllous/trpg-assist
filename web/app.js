@@ -117,7 +117,7 @@ async function api(method, path, body, token) {
 }
 
 function page(...content) {
-  app.replaceChildren(h("header", { class: "site" }, h("a", { href: "#/" }, "TRPGアシスト"), h("span", { class: "muted" }, "招待制の卓共有サイト")), ...content);
+  app.replaceChildren(h("header", { class: "site" }, h("a", { href: "#/" }, "TRPGアシスト"), h("span", { class: "muted" }, "招待制の卓共有サイト")), ...content.flat(Infinity).filter(c => c != null && c !== false));
 }
 
 function notice(title, text) {
